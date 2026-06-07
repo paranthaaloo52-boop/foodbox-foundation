@@ -5,7 +5,7 @@ import logo from "./assets/foodboxlogo.png";
 import food1 from "./assets/food1.png";
 import food2 from "./assets/food2.png";
 import food3 from "./assets/food3.png";
-import food4 from "./assets/food4.png";
+ 
 import food5 from "./assets/food5.png";
 
 function App() {
@@ -129,7 +129,7 @@ function App() {
           <img src={food1} alt="Food Distribution 1" />
           <img src={food2} alt="Food Distribution 2" />
           <img src={food3} alt="Food Distribution 3" />
-          <img src={food4} alt="Food Distribution 4" />
+          
           <img src={food5} alt="Food Distribution 5" />
         </div>
       </section>
