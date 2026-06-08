@@ -95,13 +95,13 @@ app.post("/verify-payment", async (req, res) => {
 
     const body = `${razorpay_order_id}|${razorpay_payment_id}`;
 
-    const expectedSignature = crypto
     console.log("SECRET EXISTS:", !!process.env.RAZORPAY_KEY_SECRET);
 console.log("KEY ID EXISTS:", !!process.env.RAZORPAY_KEY_ID);
-      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
-      .update(body)
-      .digest("hex");
 
+const expectedSignature = crypto
+  .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+  .update(body)
+  .digest("hex");
     if (expectedSignature !== razorpay_signature) {
       return res.status(400).json({
         success: false,
