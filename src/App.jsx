@@ -58,7 +58,7 @@ function App() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/create-order", {
+      const response = await fetch("https://foodbox-foundation-backend.onrender.com/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: selectedPackage.id }),
@@ -74,7 +74,7 @@ function App() {
         order_id: data.id,
         handler: async (response) => {
           try {
-            const verifyRes = await fetch("http://localhost:5000/verify-payment", {
+            const verifyRes = await fetch("https://foodbox-foundation-backend.onrender.com/verify-payment", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
