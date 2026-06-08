@@ -27,6 +27,7 @@ const loadRazorpay = () =>
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activePolicy, setActivePolicy] = useState(null);
   const [donationsCount, setDonationsCount] = useState(0);
   const [mealsDistributed, setMealsDistributed] = useState(0);
   const [donationsReceived, setDonationsReceived] = useState(0);
@@ -139,6 +140,7 @@ function App() {
             <a href="#gallery">Gallery</a>
             <a href="#volunteer">Volunteer</a>
             <a href="#contact">Contact</a>
+            
           </div>
         )}
       </nav>
@@ -149,7 +151,37 @@ function App() {
         <p>Join us in feeding families in need. Your contribution creates a direct impact.</p>
         <a href="#donate"><button className="hero-donate-btn">Donate Now</button></a>
       </section>
+<section id="about" className="about">
+  <h2>About Food Box Foundation</h2>
 
+  <p>
+      FoodBox Foundation is a non-profit, community-driven initiative dedicated to
+    helping families facing food insecurity. Our mission is simple: no one
+    should have to sleep with an empty stomach.
+  </p>
+
+  <p>
+    Through the generosity of donors and the support of volunteers, we collect
+    contributions and transform them into essential food supplies and grocery
+    assistance for families in need. Every donation directly helps provide
+    nourishment, hope, and dignity to people who are struggling to meet their
+    daily food requirements.
+  </p>
+
+  <p>
+    We are committed to transparency, accountability, and meaningful impact.
+    Our goal is to ensure that every contribution is used responsibly to create
+    real change within communities. By working together, we can reach more
+    families and help reduce hunger one meal at a time.
+  </p>
+
+  <p>At FoodBox Foundation, we believe that access to food is a basic human
+    necessity. Together, we can build a future where every family has the
+    support they need to live with dignity, security, and hope.
+    </p>
+    <p> <strong>Together, we can make sure that no one goes hungry.</strong>
+    </p>
+</section>
       <section className="donation-packages" id="donate">
         <h2>Donation Packages</h2>
         <div className="package-grid">
@@ -198,6 +230,167 @@ function App() {
         <p>Phone: +91 76339 14118</p>
         <p>Address: Patna, Bihar, 811104</p>
       </section>
+     
+<footer className="footer">
+  <div className="footer-content">
+    <h3>Food Box Foundation</h3>
+
+    <p>
+      Together, we can ensure that no one goes hungry.
+    </p>
+
+    <div className="footer-links">
+      <a href="#" onClick={() => setActivePolicy("privacy")}>
+        Privacy Policy
+      </a>
+
+      <a href="#" onClick={() => setActivePolicy("refund")}>
+        Refund Policy
+      </a>
+
+      <a href="#" onClick={() => setActivePolicy("terms")}>
+        Terms & Conditions
+      </a>
+
+      <a href="#contact">
+        Contact
+      </a>
+    </div>
+
+    <p className="copyright">
+      © 2026 Food Box Foundation. All Rights Reserved.
+    </p>
+  </div>
+</footer>
+
+    
+{activePolicy && (
+  <div className="policy-modal-overlay">
+    <div className="policy-modal">
+
+      <button
+        className="close-modal"
+        onClick={() => setActivePolicy(null)}
+      >
+        ✕
+      </button>
+
+      {activePolicy === "privacy" && (
+        <>
+          <h2>Privacy Policy</h2>
+          <p>
+    Food Box Foundation respects your privacy and is committed to protecting
+    your personal information.
+  </p>
+
+  <p>
+    We may collect information such as your name, email address, phone number,
+    and donation details solely for processing donations, communication, and
+    improving our services.
+  </p>
+
+  <p>
+    We do not sell, rent, or share your personal information with third
+    parties except when required by law or necessary for payment processing.
+  </p>
+
+  <p>
+    All donation transactions are processed through secure payment gateways.
+    We take reasonable measures to protect your information from unauthorized
+    access or disclosure.
+  </p>
+
+  <p>
+    By using our website, you consent to this Privacy Policy and the collection
+    of information as described above.
+  </p>
+        </>
+      )}
+
+      {activePolicy === "refund" && (
+        <>
+          <h2>Refund Policy</h2>
+           <p>
+    Food Box Foundation is committed to using donations responsibly for
+    charitable and community welfare activities.
+  </p>
+
+  <p>
+    Donations made through our website are generally considered voluntary and
+    non-refundable. Once a donation has been processed successfully, it may not
+    be eligible for cancellation or refund.
+  </p>
+
+  <p>
+    However, if a donation has been made in error, duplicated accidentally, or
+    an incorrect amount was charged, donors may contact us within 7 days of the
+    transaction for review.
+  </p>
+
+  <p>
+    Approved refund requests will be processed through the original payment
+    method within a reasonable timeframe, subject to payment gateway and
+    banking procedures.
+  </p>
+
+  <p>
+    For refund-related queries, please contact us using the details provided in
+    the Contact section of this website.
+  </p>
+        </>
+      )}
+
+      {activePolicy === "terms" && (
+        <>
+          <h2>Terms & Conditions</h2>
+           <p>
+    By accessing and using the Food Box Foundation website, you agree to
+    comply with and be bound by these Terms & Conditions. If you do not agree
+    with any part of these terms, please do not use this website.
+  </p>
+
+  <p>
+    Food Box Foundation is a charitable initiative dedicated to supporting
+    individuals and families facing food insecurity. All information provided
+    on this website is for general informational purposes only and may be
+    updated or modified without prior notice.
+  </p>
+
+  <p>
+    Donations made through this website are voluntary contributions intended
+    to support our charitable activities. While we strive to ensure that all
+    funds are utilized effectively and transparently, specific allocation of
+    donations may vary based on operational requirements and community needs.
+  </p>
+
+  <p>
+    Users agree not to misuse this website, attempt unauthorized access,
+    distribute harmful content, or engage in any activity that may disrupt the
+    website's functionality or security.
+  </p>
+
+  <p>
+    Food Box Foundation is not responsible for any indirect, incidental, or
+    consequential damages arising from the use of this website or reliance on
+    the information provided herein.
+  </p>
+
+  <p>
+    We reserve the right to modify these Terms & Conditions at any time. Any
+    changes will become effective immediately upon being published on this
+    website.
+  </p>
+
+  <p>
+    Continued use of the website after any updates constitutes acceptance of
+    the revised Terms & Conditions.
+  </p>
+        </>
+      )}
+
+    </div>
+  </div>
+)}
     </div>
   );
 }
