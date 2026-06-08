@@ -88,11 +88,16 @@ function App() {
             if (result.success) {
               alert("Payment verified successfully!");
               const docRef = doc(db, "stats", "main");
-              await updateDoc(docRef, {
-                donationsReceived: increment(selectedPackage.id),
-                familiesHelped: increment(1),
-                mealsDistributed: increment(selectedPackage.meals),
-              });
+
+const updatedDoc = await getDoc(docRef);
+
+if (updatedDoc.exists()) {
+  const updatedData = updatedDoc.data();
+
+  setDonationsCount(updatedData.familiesHelped || 0);
+  setMealsDistributed(updatedData.mealsDistributed || 0);
+  setDonationsReceived(updatedData.donationsReceived || 0);
+}
               const updatedDoc = await getDoc(docRef);
               if (updatedDoc.exists()) {
                 const updatedData = updatedDoc.data();
