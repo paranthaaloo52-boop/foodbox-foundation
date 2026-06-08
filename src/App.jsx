@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { doc, getDoc, updateDoc, increment } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import logo from "./assets/foodboxlogo.png";
 import food1 from "./assets/food1.png";
@@ -85,29 +85,22 @@ function App() {
               }),
             });
             const result = await verifyRes.json();
-            if (result.success) {
-              alert("Payment verified successfully!");
-              const docRef = doc(db, "stats", "main");
+         if (result.success) {
+  alert("Payment verified successfully!");
 
-const updatedDoc = await getDoc(docRef);
+  const docRef = doc(db, "stats", "main");
+  const updatedDoc = await getDoc(docRef);
 
-if (updatedDoc.exists()) {
-  const updatedData = updatedDoc.data();
+  if (updatedDoc.exists()) {
+    const updatedData = updatedDoc.data();
 
-  setDonationsCount(updatedData.familiesHelped || 0);
-  setMealsDistributed(updatedData.mealsDistributed || 0);
-  setDonationsReceived(updatedData.donationsReceived || 0);
+    setDonationsCount(updatedData.familiesHelped || 0);
+    setMealsDistributed(updatedData.mealsDistributed || 0);
+    setDonationsReceived(updatedData.donationsReceived || 0);
+  }
+} else {
+  alert("Payment verification failed!");
 }
-              const updatedDoc = await getDoc(docRef);
-              if (updatedDoc.exists()) {
-                const updatedData = updatedDoc.data();
-                setDonationsCount(updatedData.familiesHelped || 0);
-                setMealsDistributed(updatedData.mealsDistributed || 0);
-                setDonationsReceived(updatedData.donationsReceived || 0);
-              }
-            } else {
-              alert("Payment verification failed!");
-            }
           } catch (err) {
             console.error("Verify payment error:", err);
             alert("Error verifying payment. Check console.");
