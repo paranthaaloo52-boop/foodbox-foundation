@@ -115,7 +115,13 @@ const expectedSignature = crypto
 
     console.log("Donation Amount:", donationAmount);
     console.log("Meals:", meals);
-
+await db.collection("donations").add({
+  amount: donationAmount,
+  meals: meals,
+  razorpayOrderId: razorpay_order_id,
+  razorpayPaymentId: razorpay_payment_id,
+  createdAt: admin.firestore.FieldValue.serverTimestamp(),
+});
     const statsRef = db.collection("stats").doc("main");
 
     await statsRef.set(
