@@ -29,7 +29,8 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-
+console.log("Firebase Project:", serviceAccount.project_id);
+console.log("Client Email:", serviceAccount.client_email);
 app.get("/", (req, res) => {
   res.send("Food Box Foundation Backend Running");
 });
