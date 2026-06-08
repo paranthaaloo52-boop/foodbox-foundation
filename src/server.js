@@ -9,7 +9,7 @@ import fs from "fs";
 dotenv.config();
 
 const serviceAccount = JSON.parse(
-  fs.readFileSync("./serviceAccountKey.json", "utf8")
+  fs.readFileSync("/etc/secrets/serviceAccountKey.json", "utf8")
 );
 
 const app = express();
