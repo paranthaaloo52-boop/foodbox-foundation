@@ -194,8 +194,18 @@ setSelectedPackageForDonation(null);
           <h2 className="site-title">Food Box Foundation</h2>
         </div>
         <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>☰</div>
-        {menuOpen && (
-          <div className="mobile-menu">
+       {menuOpen && (
+  <>
+    <div
+      onClick={() => setMenuOpen(false)}
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 999,
+      }}
+    ></div>
+
+    <div className="mobile-menu">
             <a href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#donate">Donate</a>
@@ -204,7 +214,8 @@ setSelectedPackageForDonation(null);
             <a href="#contact">Contact</a>
             
           </div>
-        )}
+  </>
+)}
       </nav>
 
       <section className="hero" id="home">
