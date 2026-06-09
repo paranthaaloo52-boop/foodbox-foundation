@@ -126,15 +126,14 @@ lineHeight: "1.2",
         />
 
         <button
-          onClick={() => {
-if (password === import.meta.env.VITE_ADMIN_PASSWORD) {
+         onClick={() => {
+  if (password === import.meta.env.VITE_ADMIN_PASSWORD) {
   localStorage.setItem("adminLoggedIn", "true");
   setIsAuthenticated(true);
+} else {
+  alert("Wrong Password");
 }
-             else {
-              alert("Wrong Password");
-            }
-          }}
+}}
           style={{
             width: "100%",
             padding: "14px",
