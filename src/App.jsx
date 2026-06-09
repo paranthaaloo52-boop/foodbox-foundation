@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import logo from "./assets/foodboxlogo.png";
 import food1 from "./assets/food1.png";
@@ -31,7 +31,11 @@ function App() {
   const [donationsCount, setDonationsCount] = useState(0);
   const [mealsDistributed, setMealsDistributed] = useState(0);
   const [donationsReceived, setDonationsReceived] = useState(0);
-
+const [showDetailsPopup, setShowDetailsPopup] = useState(false);
+const [donorName, setDonorName] = useState("");
+const [donorEmail, setDonorEmail] = useState("");
+const [donorPhone, setDonorPhone] = useState("");
+const [selectedPackageForDonation, setSelectedPackageForDonation] = useState(null);
   useEffect(() => {
     const loadImpactData = async () => {
       try {
@@ -98,6 +102,28 @@ function App() {
     setMealsDistributed(updatedData.mealsDistributed || 0);
     setDonationsReceived(updatedData.donationsReceived || 0);
   }
+  await setDoc(
+  doc(db, "donors", response.razorpay_payment_id),
+  {
+    name: donorName,
+    email: donorEmail,
+    phone: donorPhone,
+
+    amount: selectedPackage.id,
+    meals: selectedPackage.meals,
+    perks: selectedPackage.perks,
+
+    paymentId: response.razorpay_payment_id,
+    orderId: response.razorpay_order_id,
+
+    createdAt: new Date().toISOString(),
+  }
+);
+
+setDonorName("");
+setDonorEmail("");
+setDonorPhone("");
+setSelectedPackageForDonation(null);
 } else {
   alert("Payment verification failed!");
 }
@@ -107,10 +133,10 @@ function App() {
           }
         },
         prefill: {
-          name: "Your Name",
-          email: "youremail@example.com",
-          contact: "9999999999",
-        },
+  name: donorName,
+  email: donorEmail,
+  contact: donorPhone,
+},
         theme: { color: "#3399cc" },
       };
 
@@ -188,7 +214,14 @@ function App() {
               <h3>₹{pkg.id}</h3>
               <p>{pkg.meals} Meals</p>
               <ul>{pkg.perks.map((perk, i) => (<li key={i}>✅ {perk}</li>))}</ul>
-              <button onClick={() => createOrder(pkg)}>Donate</button>
+           <button
+  onClick={() => {
+    setSelectedPackageForDonation(pkg);
+    setShowDetailsPopup(true);
+  }}
+>
+  Donate
+</button>
             </div>
           ))}
         </div>
@@ -260,7 +293,52 @@ function App() {
     </p>
   </div>
 </footer>
+{showDetailsPopup && (
+  <div className="policy-modal-overlay">
+    <div className="policy-modal donor-modal">
+     <h2>💝 Donor Details</h2>
 
+<p className="donor-subtitle">
+  Your contribution helps provide food to families in need.
+</p>
+
+      <input
+        type="text"
+        placeholder="Your Name"
+        value={donorName}
+        onChange={(e) => setDonorName(e.target.value)}
+      />
+
+      <input
+        type="email"
+        placeholder="Your Email"
+        value={donorEmail}
+        onChange={(e) => setDonorEmail(e.target.value)}
+      />
+
+      <input
+        type="tel"
+        placeholder="Your Phone Number"
+        value={donorPhone}
+        onChange={(e) => setDonorPhone(e.target.value)}
+      />
+
+      <button
+        onClick={() => {
+          if (!donorName || !donorEmail || !donorPhone) {
+            alert("Please fill all details");
+            return;
+          }
+
+          setShowDetailsPopup(false);
+          createOrder(selectedPackageForDonation);
+        }}
+      >
+        Proceed to Payment
+      </button>
+    </div>
+  </div>
+)}
     
 {activePolicy && (
   <div className="policy-modal-overlay">
