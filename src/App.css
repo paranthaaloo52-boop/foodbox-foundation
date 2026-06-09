@@ -618,6 +618,7 @@ line-height: 1.05;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  z-index: 1000;
 }
 
 .mobile-menu a {

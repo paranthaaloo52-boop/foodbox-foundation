@@ -206,13 +206,74 @@ setSelectedPackageForDonation(null);
       }}
     ></div>
 
-    <div className="mobile-menu">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#donate">Donate</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#volunteer">Volunteer</a>
-            <a href="#contact">Contact</a>
+    <div
+  className="mobile-menu"
+  onClick={(e) => e.stopPropagation()}
+>
+       <a
+  href="#about"
+  onClick={(e) => {
+    e.preventDefault();
+    document.getElementById("about")?.scrollIntoView({
+      behavior: "smooth",
+    });
+    setMenuOpen(false);
+  }}
+>
+  About
+</a>
+
+<a
+  href="#donate"
+  onClick={(e) => {
+    e.preventDefault();
+    document.getElementById("donate")?.scrollIntoView({
+      behavior: "smooth",
+    });
+    setMenuOpen(false);
+  }}
+>
+  Donate
+</a>
+
+<a
+  href="#gallery"
+  onClick={(e) => {
+    e.preventDefault();
+    document.getElementById("gallery")?.scrollIntoView({
+      behavior: "smooth",
+    });
+    setMenuOpen(false);
+  }}
+>
+  Gallery
+</a>
+
+<a
+  href="#volunteer"
+  onClick={(e) => {
+    e.preventDefault();
+    document.getElementById("volunteer")?.scrollIntoView({
+      behavior: "smooth",
+    });
+    setMenuOpen(false);
+  }}
+>
+  Volunteer
+</a>
+
+<a
+  href="#contact"
+  onClick={(e) => {
+    e.preventDefault();
+    document.getElementById("contact")?.scrollIntoView({
+      behavior: "smooth",
+    });
+    setMenuOpen(false);
+  }}
+>
+  Contact
+</a>
             
           </div>
   </>
@@ -497,12 +558,7 @@ setSelectedPackageForDonation(null);
       <a href="#" onClick={() => setActivePolicy("terms")}>
         Terms & Conditions
       </a>
-
-      <a href="#contact">
-        Contact
-      </a>
     </div>
-
     <p className="copyright">
       © 2026 Food Box Foundation. All Rights Reserved.
     </p>
