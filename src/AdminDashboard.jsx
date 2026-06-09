@@ -262,11 +262,12 @@ return (
   boxShadow: "0 12px 30px rgba(0,0,0,0.12)",
   maxWidth: "900px",
   margin: "0 auto",
+  overflowX: "auto",
 }}
     >
       <table
         style={{
-          width: "100%",
+         minWidth: "700px",
           borderCollapse: "collapse",
           backgroundColor: "white",
           borderRadius: "12px",
