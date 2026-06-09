@@ -36,6 +36,9 @@ const loadRazorpay = () =>
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activePolicy, setActivePolicy] = useState(null);
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
+const [adminPassword, setAdminPassword] = useState("");
+const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const [donationsCount, setDonationsCount] = useState(0);
   const [mealsDistributed, setMealsDistributed] = useState(0);
   const [donationsReceived, setDonationsReceived] = useState(0);
@@ -378,7 +381,30 @@ setSelectedPackageForDonation(null);
         <p>Phone: +91 76339 14118</p>
         <p>Address: Patna, Bihar, 811104</p>
       </section>
- 
+    {!isAdminLoggedIn ? (
+  <button
+    onClick={() => setShowAdminLogin(true)}
+    style={{
+      position: "fixed",
+      bottom: "20px",
+      right: "20px",
+      width: "55px",
+      height: "55px",
+      borderRadius: "50%",
+      border: "none",
+      background: "#1e3a8a",
+      color: "white",
+      fontSize: "26px",
+      cursor: "pointer",
+      boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+      zIndex: 9999,
+    }}
+  >
+    ⚙️
+  </button>
+) : (
+  <AdminDashboard />
+)}
 <footer className="footer">
   <div className="footer-content">
     <h3>Food Box Foundation</h3>
@@ -456,7 +482,43 @@ setSelectedPackageForDonation(null);
     </div>
   </div>
 )}
-    
+ {showAdminLogin && (
+  <div className="policy-modal-overlay">
+    <div className="policy-modal">
+
+      <h2>Admin Login</h2>
+
+      <input
+        type="password"
+        placeholder="Enter Admin Password"
+        value={adminPassword}
+        onChange={(e) => setAdminPassword(e.target.value)}
+      />
+
+      <button
+        onClick={() => {
+          if (adminPassword === "foodbox123") {
+            setIsAdminLoggedIn(true);
+            setShowAdminLogin(false);
+            setAdminPassword("");
+          } else {
+            alert("Wrong Password");
+          }
+        }}
+      >
+        Login
+      </button>
+
+      <button
+        onClick={() => setShowAdminLogin(false)}
+        style={{ marginTop: "10px" }}
+      >
+        Close
+      </button>
+
+    </div>
+  </div>
+)}   
 {activePolicy && (
   <div className="policy-modal-overlay">
     <div className="policy-modal">
