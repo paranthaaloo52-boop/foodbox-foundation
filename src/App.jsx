@@ -1,13 +1,21 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  getDocs,
+  onSnapshot
+} from "firebase/firestore";
+
 import { db } from "./firebase";
 import logo from "./assets/foodboxlogo.png";
 import food1 from "./assets/food1.png";
 import food2 from "./assets/food2.png";
 import food3 from "./assets/food3.png";
 import food5 from "./assets/food5.png";
-
+import AdminDashboard from "./AdminDashboard";
 const packages = [
   { id: 500, meals: 15, perks: ["Photo of donation"] },
   { id: 750, meals: 22, perks: ["Photo + Video of donation"] },
@@ -35,24 +43,51 @@ const [showDetailsPopup, setShowDetailsPopup] = useState(false);
 const [donorName, setDonorName] = useState("");
 const [donorEmail, setDonorEmail] = useState("");
 const [donorPhone, setDonorPhone] = useState("");
+const [recentDonors, setRecentDonors] = useState([]);
 const [selectedPackageForDonation, setSelectedPackageForDonation] = useState(null);
   useEffect(() => {
-    const loadImpactData = async () => {
-      try {
-        const docRef = doc(db, "stats", "main");
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          setDonationsCount(data.familiesHelped || 0); // Will display as Donations
-          setMealsDistributed(data.mealsDistributed || 0);
-          setDonationsReceived(data.donationsReceived || 0);
-        }
-      } catch (error) {
-        console.error(error);
+  const loadImpactData = async () => {
+    try {
+      const docRef = doc(db, "stats", "main");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+
+        setDonationsCount(data.familiesHelped || 0);
+        setMealsDistributed(data.mealsDistributed || 0);
+        setDonationsReceived(data.donationsReceived || 0);
       }
-    };
-    loadImpactData();
-  }, []);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  loadImpactData();
+
+  const unsubscribe = loadRecentDonors();
+
+  return () => unsubscribe();
+
+}, []);
+const loadRecentDonors = () => {
+  const donorsRef = collection(db, "donors");
+
+  return onSnapshot(donorsRef, (snapshot) => {
+    const donors = [];
+
+    snapshot.forEach((doc) => {
+      donors.push(doc.data());
+    });
+
+    donors.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+
+    setRecentDonors(donors.slice(0, 5));
+  });
+};
+
 
   const createOrder = async (selectedPackage) => {
     const res = await loadRazorpay();
@@ -226,19 +261,101 @@ setSelectedPackageForDonation(null);
           ))}
         </div>
       </section>
+<section className="impact-heading">
 
-      <section className="impact">
-        <h2>Impact Tracker</h2>
-        <div className="stats">
-          <div className="stat-card"><h3>{donationsCount}</h3><p>Donations</p></div>
-          <div className="stat-card"><h3>{mealsDistributed}</h3><p>Meals Distributed</p></div>
-          <div className="stat-card"><h3>₹{donationsReceived}</h3><p>Donations Received</p></div>
+  <h2>Our Impact So Far</h2>
+
+  <p>Together, we are making a real difference</p>
+
+</section>
+      <div className="stats">
+
+  <div className="stat-card donations-card">
+    <h3>{donationsCount}</h3>
+    <p>Donations</p>
+  </div>
+
+  <div className="stat-card meals-card">
+    <h3>{mealsDistributed}</h3>
+    <p>Meals Distributed</p>
+  </div>
+
+  <div className="stat-card received-card">
+    <h3>₹{donationsReceived}</h3>
+    <p>Donations Received</p>
+  </div>
+
+</div>
+<section
+  style={{
+    padding: "60px 20px",
+    background: "#f8fafc",
+  }}
+>
+  <div className="donation-heading">
+  <h2>🎁 Recent Donations</h2>
+  <p>Thank you to our amazing donors</p>
+</div>
+
+  <div
+    style={{
+      maxWidth: "900px",
+      margin: "0 auto",
+      background: "white",
+      borderRadius: "20px",
+      padding: "20px",
+      boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+    }}
+  >
+    <div className="premium-donations-table">
+
+  <div className="table-header">
+    <div>👤 Donor</div>
+    <div>₹ Amount</div>
+    <div>🍽 Meals Sponsored</div>
+  </div>
+
+  {recentDonors.map((donor, index) => (
+    <div className="table-row" key={index}>
+
+      <div className="donor-cell">
+        <div className="donor-avatar">
+          {donor.name?.charAt(0).toUpperCase()}
         </div>
-      </section>
 
-      <section id="gallery" className="gallery">
-        <h2>Gallery</h2>
-        <div className="gallery-grid">
+        <span>{donor.name}</span>
+      </div>
+
+      <div className="amount-cell">
+        ₹{donor.amount}
+      </div>
+
+      <div className="meals-cell">
+        {donor.meals}
+      </div>
+
+    </div>
+  ))}
+
+</div>
+  </div>
+</section>
+     <section id="gallery" className="gallery premium-gallery">
+
+  <div className="gallery-header">
+
+    <div className="moments-heading">
+      <h2>Moments of Impact</h2>
+      <p>Smiles we create together</p>
+    </div>
+
+    <button className="view-photos-btn">
+      📷 View All Photos
+    </button>
+
+  </div>
+
+  <div className="gallery-grid">
           <img src={food1} alt="Food Distribution 1" />
           <img src={food2} alt="Food Distribution 2" />
           <img src={food3} alt="Food Distribution 3" />
@@ -261,7 +378,7 @@ setSelectedPackageForDonation(null);
         <p>Phone: +91 76339 14118</p>
         <p>Address: Patna, Bihar, 811104</p>
       </section>
-     
+ 
 <footer className="footer">
   <div className="footer-content">
     <h3>Food Box Foundation</h3>
