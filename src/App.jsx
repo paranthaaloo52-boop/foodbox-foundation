@@ -16,6 +16,7 @@ import food2 from "./assets/food2.png";
 import food3 from "./assets/food3.png";
 import food5 from "./assets/food5.png";
 import AdminDashboard from "./AdminDashboard";
+
 const packages = [
   { id: 500, meals: 15, perks: ["Photo of donation"] },
   { id: 750, meals: 22, perks: ["Photo + Video of donation"] },
@@ -218,42 +219,88 @@ setSelectedPackageForDonation(null);
 )}
       </nav>
 
-      <section className="hero" id="home">
-        <h1>Food Box Foundation</h1>
-        <h2>Every Donation Becomes a Meal</h2>
-        <p>Join us in feeding families in need. Your contribution creates a direct impact.</p>
-        <a href="#donate"><button className="hero-donate-btn">Donate Now</button></a>
-      </section>
+  <section className="hero" id="home">
+  <div className="hero-overlay">
+    <div className="hero-content">
+      <h1>No Family Should Sleep Hungry Tonight</h1>
+
+      <p>
+        Food Box Foundation provides meals and groceries to families
+        facing food insecurity. Every contribution creates a direct impact.
+      </p>
+
+      <div className="hero-buttons">
+        <a href="#donate">
+          <button className="hero-donate-btn">Donate Now</button>
+        </a>
+
+        <a href="#impact">
+          <button className="hero-impact-btn">
+  View Impact →
+</button>
+        </a>
+      </div>
+
+      
+  </div>
+  </div>
+</section>    
 <section id="about" className="about">
   <h2>About Food Box Foundation</h2>
 
-  <p>
-      FoodBox Foundation is a non-profit, community-driven initiative dedicated to
-    helping families facing food insecurity. Our mission is simple: no one
-    should have to sleep with an empty stomach.
+  <p className="about-intro">
+    FoodBox Foundation is a community-driven initiative dedicated to helping
+    families facing food insecurity. Together, we work to ensure that no one
+    has to sleep hungry.
   </p>
 
-  <p>
-    Through the generosity of donors and the support of volunteers, we collect
-    contributions and transform them into essential food supplies and grocery
-    assistance for families in need. Every donation directly helps provide
-    nourishment, hope, and dignity to people who are struggling to meet their
-    daily food requirements.
-  </p>
+  <div className="mission-cards">
 
-  <p>
-    We are committed to transparency, accountability, and meaningful impact.
-    Our goal is to ensure that every contribution is used responsibly to create
-    real change within communities. By working together, we can reach more
-    families and help reduce hunger one meal at a time.
-  </p>
+    <div className="mission-card">
+     <h3>
+  <span className="card-icon">🍲</span>
+  Feed Families
+</h3>
+      <p>
+        Helping provide meals and essential groceries to families in need.
+      </p>
+    </div>
 
-  <p>At FoodBox Foundation, we believe that access to food is a basic human
-    necessity. Together, we can build a future where every family has the
-    support they need to live with dignity, security, and hope.
-    </p>
-    <p> <strong>Together, we can make sure that no one goes hungry.</strong>
-    </p>
+    <div className="mission-card">
+      <h3>
+  <span className="card-icon">❤️</span>
+  Direct Impact
+</h3>
+      <p>
+        Every donation directly supports people facing food insecurity.
+      </p>
+    </div>
+
+    <div className="mission-card">
+      <h3>
+  <span className="card-icon">🤝</span>
+  Community Driven
+</h3>
+      <p>
+        Powered by volunteers, donors, and supporters working together.
+      </p>
+    </div>
+
+    <div className="mission-card">
+    <h3>
+  <span className="card-icon">🔍</span>
+  Transparency
+</h3>
+      <p>
+        Clear updates, accountability, and proof of impact for donations.
+      </p>
+    </div>
+
+  </div>
+
+  <p className="about-footer">
+    <strong>Together, we can make sure that no one goes hungry.</strong>
+  </p>
 </section>
       <section className="donation-packages" id="donate">
         <h2>Donation Packages</h2>
@@ -275,7 +322,7 @@ setSelectedPackageForDonation(null);
           ))}
         </div>
       </section>
-<section className="impact-heading">
+<section id="impact" className="impact-heading">
 
   <h2>Our Impact So Far</h2>
 
@@ -321,35 +368,30 @@ setSelectedPackageForDonation(null);
       boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
     }}
   >
-    <div className="premium-donations-table">
-
-  <div className="table-header">
-    <div>👤 Donor</div>
-    <div>₹ Amount</div>
-    <div>🍽 Meals Sponsored</div>
-  </div>
+   <div className="donation-cards">
 
   {recentDonors.map((donor, index) => (
-    <div className="table-row" key={index}>
 
-      <div className="donor-cell">
-        <div className="donor-avatar">
-          {donor.name?.charAt(0).toUpperCase()}
-        </div>
+    <div className="donation-card" key={index}>
 
-        <span>{donor.name}</span>
+      <div className="donor-avatar">
+        {donor.name?.charAt(0).toUpperCase()}
       </div>
 
-      <div className="amount-cell">
+      <h4>{donor.name}</h4>
+
+      <div className="donation-amount">
         ₹{donor.amount}
       </div>
 
-      <div className="meals-cell">
-        {donor.meals}
-      </div>
+      <p>
+        🍽 {donor.meals} Meals Sponsored
+      </p>
 
     </div>
+
   ))}
+
 
 </div>
   </div>
@@ -385,13 +427,32 @@ setSelectedPackageForDonation(null);
         </a>
       </section>
 
-      <section id="contact" className="contact">
-        <h2>Contact Us</h2>
-        <p>Name: sunny singh</p>
-        <p>Email: paranthaaloo52@gmail.com</p>
-        <p>Phone: +91 76339 xxxxx</p>
-        <p>Address: Patna, Bihar, 811104</p>
-      </section>
+   <section id="contact" className="contact-section">
+
+  <h2 className="contact-title">
+    Contact Us
+  </h2>
+
+  <div className="contact-card-single">
+
+  <h3>👤 Sunny Singh</h3>
+
+  <p>📧 paranthaaloo52@gmail.com</p>
+
+  <p>📍 Patna, Bihar, India</p>
+
+  <a
+  href="https://wa.me/917633914118"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="whatsapp-btn"
+>
+  💬 Chat on WhatsApp
+</a>
+
+
+</div>
+</section>
     {!isAdminLoggedIn ? (
   <button
     onClick={() => setShowAdminLogin(true)}
