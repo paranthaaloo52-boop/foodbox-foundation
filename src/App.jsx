@@ -389,7 +389,7 @@ setSelectedPackageForDonation(null);
         <h2>Contact Us</h2>
         <p>Name: sunny singh</p>
         <p>Email: paranthaaloo52@gmail.com</p>
-        <p>Phone: +91 76339 14118</p>
+        <p>Phone: +91 76339 xxxxx</p>
         <p>Address: Patna, Bihar, 811104</p>
       </section>
     {!isAdminLoggedIn ? (
