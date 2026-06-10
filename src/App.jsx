@@ -615,13 +615,25 @@ setSelectedPackageForDonation(null);
   </div>
 </footer>
 {showDetailsPopup && (
-  <div className="policy-modal-overlay">
-    <div className="policy-modal donor-modal">
-     <h2>💝 Donor Details</h2>
+  <div
+    className="policy-modal-overlay"
+    onClick={() => setShowDetailsPopup(false)} // overlay click pe close
+  >
+    <div
+      className="policy-modal donor-modal"
+      onClick={(e) => e.stopPropagation()} // modal ke andar click ko rok do
+    >
+      <button
+  onClick={() => setShowDetailsPopup(false)}
+  className="donor-close-btn"
+>
+  ✕
+</button>
 
-<p className="donor-subtitle">
-  Your contribution helps provide food to families in need.
-</p>
+      <h2>💝 Donor Details</h2>
+      <p className="donor-subtitle">
+        Your contribution helps provide food to families in need.
+      </p>
 
       <input
         type="text"
@@ -629,14 +641,12 @@ setSelectedPackageForDonation(null);
         value={donorName}
         onChange={(e) => setDonorName(e.target.value)}
       />
-
       <input
         type="email"
         placeholder="Your Email"
         value={donorEmail}
         onChange={(e) => setDonorEmail(e.target.value)}
       />
-
       <input
         type="tel"
         placeholder="Your Phone Number"
