@@ -981,9 +981,9 @@ html {
 @media (max-width: 768px) {
 
   .hero {
-    padding-top: 150px;
-    padding-bottom: 110px;
-  }
+  padding-top: 90px;
+  padding-bottom: 70px;
+}
 
   .hero h1 {
   font-size: 58px;
