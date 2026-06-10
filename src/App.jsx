@@ -518,13 +518,25 @@ setSelectedPackageForDonation(null);
         </div>
       </section>
 
-      <section id="volunteer" className="volunteer">
-        <h2>Become a Volunteer</h2>
-        <p>Join Food Box Foundation and help us serve families in need.</p>
-        <a href="https://forms.gle/XgBAey8zCZ8w9rHw9" target="_blank" rel="noreferrer">
-          <button>🚀 Apply as Volunteer</button>
-        </a>
-      </section>
+    <section className="volunteer">
+  <div className="volunteer-card">
+
+    <h2>Become a Volunteer</h2>
+
+    <p>
+      Join Food Box Foundation and help us serve families in need.
+    </p>
+
+    <a 
+      href="https://forms.gle/JykcuS1n8tw1tyoi7" 
+      target="_blank" 
+      rel="noopener noreferrer"
+    >
+      <button>🚀 Apply as Volunteer</button>
+    </a>
+
+  </div>
+</section>
 
    <section id="contact" className="contact-section">
 
