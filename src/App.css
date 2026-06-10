@@ -168,8 +168,19 @@ line-height: 1.05;
 }
 
 .hero-donate-btn {
-  background: #ff9800;
+  background: linear-gradient(135deg, #ff4f8b, #e91e63);
   color: white;
+
+  box-shadow: 0 8px 20px rgba(255, 79, 139, 0.4);
+
+  transition: all 0.3s ease;
+}
+.hero-donate-btn:hover {
+  transform: translateY(-3px);
+
+  background: linear-gradient(135deg, #ff6aa2, #d81b60);
+
+  box-shadow: 0 12px 28px rgba(255, 79, 139, 0.6);
 }
 
 .hero-impact-btn {
@@ -186,7 +197,6 @@ line-height: 1.05;
   transition: all 0.3s ease;
 }
 
-.hero-donate-btn:hover,
 .hero-impact-btn:hover {
   transform: translateY(-3px);
 }
@@ -300,18 +310,28 @@ line-height: 1.05;
 }
 
 .package-card ul {
+	list-style: none;
+	padding: 0;
+	margin: 20px 0;
 	text-align: left;
-	margin-bottom: 20px;
-	padding-left: 20px;
+	width: 100%;
 }
 
 .package-card li {
-	margin-bottom: 8px;
-	line-height: 1.5;
-	font-size: 15px;
-	color: #444;
-}
+	background: #f8fafc;
+	border: 1px solid #e2e8f0;
 
+	padding: 12px 14px;
+	margin-bottom: 10px;
+
+	border-radius: 12px;
+
+	font-size: 14px;
+	font-weight: 500;
+	color: #475569;
+
+	line-height: 1.5;
+}
 .package-card li::marker {
 	color: #1565c0;
 }
@@ -321,18 +341,23 @@ line-height: 1.05;
 	padding: 14px;
 	border-radius: 15px;
 	font-size: 18px;
-	font-weight: bold;
+	font-weight: 700;
 	border: none;
-	background: linear-gradient(135deg, #ff9800, #f57c00);
+
+	background: linear-gradient(135deg, #ff4f87, #ff6b9a);
+
 	color: white;
 	cursor: pointer;
-	box-shadow: 0 8px 20px rgba(255,152,0,0.4);
-	transition: 0.3s;
+
+	box-shadow: 0 10px 25px rgba(255, 79, 135, 0.35);
+
+	transition: all 0.3s ease;
 }
 
 .package-card button:hover {
 	transform: translateY(-4px);
-	box-shadow: 0 12px 28px rgba(255,152,0,0.6);
+
+	box-shadow: 0 15px 35px rgba(255, 79, 135, 0.5);
 }
 
 /* Gallery */
@@ -1513,4 +1538,49 @@ html {
 .whatsapp-btn:hover {
   transform: translateY(-2px);
   background: #1ebe5d;
+}
+.package-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  background: linear-gradient(135deg, #ff6b6b, #ff4d4d);
+  color: white;
+
+  padding: 8px 12px;
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  z-index: 2;
+}
+
+.package-card {
+  position: relative;
+}
+.package-price {
+  font-size: 52px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+.meal-badge {
+  display: inline-block;
+
+  background: #eff6ff;
+  color: #2563eb;
+
+  padding: 10px 16px;
+  border-radius: 999px;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  margin-bottom: 20px;
+
+  border: 1px solid #bfdbfe;
 }

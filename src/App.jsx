@@ -18,13 +18,34 @@ import food5 from "./assets/food5.png";
 import AdminDashboard from "./AdminDashboard";
 
 const packages = [
-  { id: 500, meals: 15, perks: ["Photo of donation"] },
-  { id: 750, meals: 22, perks: ["Photo + Video of donation"] },
-  { id: 1000, meals: 30, perks: ["Donation with name/photo on packaging"] },
-  { id: 2000, meals: 60, perks: ["Photo + Video + Name/photo on packaging or custom message"] },
-  { id: 5000, meals: 300, perks: ["Photo + Video + Name/photo on packaging + Special Thanking video"] },
-];
+  { id: 500, meals: 15, perks: ["Photos of donation"] },
 
+  { id: 750, meals: 22, perks: ["Photos + Video of donation"] },
+
+  {
+    id: 1000,
+    meals: 30,
+    badge: "🔥 Most Popular",
+    perks: ["Donation with name/photo on packaging"],
+  },
+
+  {
+    id: 2000,
+    meals: 60,
+    badge: "⭐ Best Value",
+    perks: [
+      "Photo + Video + Name/photo on packaging or custom message",
+    ],
+  },
+
+  {
+    id: 5000,
+    meals: 150,
+    perks: [
+      "Photo + Video + Name/photo on packaging + Special Thanking video",
+    ],
+  },
+];
 const loadRazorpay = () =>
   new Promise((resolve) => {
     const script = document.createElement("script");
@@ -368,8 +389,17 @@ setSelectedPackageForDonation(null);
         <div className="package-grid">
           {packages.map((pkg) => (
             <div key={pkg.id} className="package-card">
-              <h3>₹{pkg.id}</h3>
-              <p>{pkg.meals} Meals</p>
+              {pkg.badge && (
+  <div className="package-badge">
+    {pkg.badge}
+  </div>
+)}
+              <h3 className="package-price">
+  ₹{pkg.id}
+</h3>
+            <div className="meal-badge">
+  🍽 {pkg.meals} Meals
+</div>  
               <ul>{pkg.perks.map((perk, i) => (<li key={i}>✅ {perk}</li>))}</ul>
            <button
   onClick={() => {
