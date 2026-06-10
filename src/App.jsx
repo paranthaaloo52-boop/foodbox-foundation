@@ -566,7 +566,7 @@ setSelectedPackageForDonation(null);
 </section>
     {!isAdminLoggedIn ? (
   <button
-    onClick={() => setShowAdminLogin(true)}
+   onClick={() => setIsAdminLoggedIn(true)}
     style={{
       position: "fixed",
       bottom: "20px",
@@ -670,43 +670,7 @@ setSelectedPackageForDonation(null);
     </div>
   </div>
 )}
- {showAdminLogin && (
-  <div className="policy-modal-overlay">
-    <div className="policy-modal">
-
-      <h2>Admin Login</h2>
-
-      <input
-        type="password"
-        placeholder="Enter Admin Password"
-        value={adminPassword}
-        onChange={(e) => setAdminPassword(e.target.value)}
-      />
-
-      <button
-        onClick={() => {
-          if (adminPassword === "foodbox123") {
-            setIsAdminLoggedIn(true);
-            setShowAdminLogin(false);
-            setAdminPassword("");
-          } else {
-            alert("Wrong Password");
-          }
-        }}
-      >
-        Login
-      </button>
-
-      <button
-        onClick={() => setShowAdminLogin(false)}
-        style={{ marginTop: "10px" }}
-      >
-        Close
-      </button>
-
-    </div>
-  </div>
-)}   
+ 
 {activePolicy && (
   <div className="policy-modal-overlay">
     <div className="policy-modal">
