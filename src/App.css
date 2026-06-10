@@ -643,7 +643,7 @@ line-height: 1.05;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  z-index: 1000;
+  z-index: 1001;
 }
 
 .mobile-menu a {
@@ -1582,4 +1582,28 @@ right: 12px;
   margin-bottom: 20px;
 
   border: 1px solid #bfdbfe;
+}
+.section-title {
+  text-align: center;
+ margin: 20px 0 50px;
+}
+
+.section-title span {
+  display: block;
+  color: #ff4f8b;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.section-title h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1e3a8a;
+  margin-bottom: 10px;
+}
+
+.section-title p {
+  font-size: 16px;
+  color: #555;
 }

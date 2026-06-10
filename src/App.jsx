@@ -219,13 +219,17 @@ setSelectedPackageForDonation(null);
        {menuOpen && (
   <>
     <div
-      onClick={() => setMenuOpen(false)}
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 999,
-      }}
-    ></div>
+  onClick={() => setMenuOpen(false)}
+  style={{
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100vh",
+    zIndex: 999,
+    background: "transparent",
+  }}
+/>
 
     <div
   className="mobile-menu"
@@ -385,7 +389,11 @@ setSelectedPackageForDonation(null);
   </p>
 </section>
       <section className="donation-packages" id="donate">
-        <h2>Donation Packages</h2>
+        <div className="section-title">
+  <span>💝 Support a Family</span>
+  <h2>Donation Packages</h2>
+  <p>Choose a package and create a direct impact</p>
+</div>
         <div className="package-grid">
           {packages.map((pkg) => (
             <div key={pkg.id} className="package-card">
