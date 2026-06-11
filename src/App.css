@@ -409,7 +409,8 @@ line-height: 1.05;
 
 /* Volunteer */
 .volunteer {
-  padding: 100px 20px;
+  padding: 80px 20px 40px;
+
   background: #f8fafc;
 
   display: flex;
@@ -1660,4 +1661,9 @@ right: 12px;
 
 .donor-close-btn:hover {
   transform: scale(1.1);
+}
+.contact-section {
+  padding: 30px;
+  text-align: center;
+  background: #f8fafc;
 }

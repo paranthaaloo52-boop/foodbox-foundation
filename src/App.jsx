@@ -58,8 +58,7 @@ const loadRazorpay = () =>
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activePolicy, setActivePolicy] = useState(null);
-  const [showAdminLogin, setShowAdminLogin] = useState(false);
-const [adminPassword, setAdminPassword] = useState("");
+  
 const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const [donationsCount, setDonationsCount] = useState(0);
   const [mealsDistributed, setMealsDistributed] = useState(0);
@@ -540,9 +539,11 @@ setSelectedPackageForDonation(null);
 
    <section id="contact" className="contact-section">
 
-  <h2 className="contact-title">
-    Contact Us
-  </h2>
+   <div className="section-title">
+    <span>GET IN TOUCH</span>
+    <h2>Contact Us</h2>
+    <p>Have questions or want to support our mission? Reach out anytime.</p>
+  </div>
 
   <div className="contact-card-single">
 
@@ -564,9 +565,19 @@ setSelectedPackageForDonation(null);
 
 </div>
 </section>
-    {!isAdminLoggedIn ? (
+  {!isAdminLoggedIn ? (
   <button
-   onClick={() => setIsAdminLoggedIn(true)}
+ onClick={() => {
+  setIsAdminLoggedIn(true);
+
+  setTimeout(() => {
+    document
+      .getElementById("admin-dashboard")
+      ?.scrollIntoView({
+        behavior: "smooth",
+      });
+  }, 100);
+}}
     style={{
       position: "fixed",
       bottom: "20px",
@@ -586,8 +597,11 @@ setSelectedPackageForDonation(null);
     ⚙️
   </button>
 ) : (
+ <div id="admin-dashboard">
   <AdminDashboard />
+</div>
 )}
+
 <footer className="footer">
   <div className="footer-content">
     <h3>Food Box Foundation</h3>

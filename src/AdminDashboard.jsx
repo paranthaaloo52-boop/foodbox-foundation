@@ -164,7 +164,13 @@ lineHeight: "1.2",
   );
 }
 return (
-  <div style={{ padding: "20px", fontFamily: "Arial" }}>
+  <div
+    id="admin-dashboard"
+    style={{
+      padding: "20px",
+      fontFamily: "Arial",
+    }}
+  >
     <div
   style={{
     display: "flex",
